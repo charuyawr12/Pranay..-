@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Pranay ♡</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fae1dd; /* Base pink from video */
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+
+        /* Moving Background Circles */
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.4);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: move 10s infinite alternate;
+        }
+
+        body::before { top: 10%; left: 10%; }
+        body::after { bottom: 10%; right: 10%; animation-delay: -5s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
+        }
+
+        /* Falling Hearts */
+        .heart-bg {
+            position: absolute;
+            top: -10%;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: fall 4s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: #f1c40f; /* Match the video yellow */
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #f39c12;
+            transform-origin: top;
+            transition: 0.6s ease-in-out;
+            z-index: 4;
+        }
+
+        .envelope::after {
+            content: "Place your hand here";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #444;
+            font-weight: bold;
+            font-size: 18px;
+            z-index: 5;
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 5px;
+            left: 10px;
+            width: 280px;
+            height: 230px;
+            background: white;
+            padding: 15px;
+            text-align: center;
+            transition: 0.6s ease-in-out;
+            z-index: 3;
+            border-radius: 5px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .letter img {
+            width: 110px;
+            margin-bottom: 10px;
+        }
+
+        .letter h1 { font-size: 16px; color: #d63384; margin: 0; line-height: 1.2; }
+        .letter p { font-size: 13px; color: #444; line-height: 1.4; margin: 8px 0; }
+
+        .envelope-wrapper.open .flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper.open .letter { transform: translateY(-160px); z-index: 5; }
+        .envelope-wrapper.open .envelope::after { opacity: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="envelope-wrapper" onclick="this.classList.toggle('open')">
+        <div class="flap"></div>
+        <div class="letter">
+            <img src="https://media.tenor.com/T_7_7J_E3p8AAAAi/milk-and-mocha-hug.gif" alt="Cute Hug">
+            <h1>You are one in a million feeling, I love you! ❤️</h1>
+            <p>So this is a love letter for you bcz mai dikhati ny but yes I do love you very much.</p>
+            <p>Teko ny pta how much I'm happy to have you in my life. Tu bohot accha h bkl 😂</p>
+            <p>😭 bass Tu jana mt baaki ilyyyyy 💖</p>
+        </div>
+        <div class="envelope"></div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
